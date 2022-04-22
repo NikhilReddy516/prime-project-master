@@ -22,7 +22,7 @@ public class PrimePrinter {
         int nextOddNumber = 1;
         final int ORDMAX = 30;
         int nextPrimeSquare = 9;
-        int[] MULT = new int[ORDMAX+1];
+        int[] primeMultiples = new int[ORDMAX+1];
         int[] primesList = new int[NUMBER_OF_PRIMES +1];
         primesList[1] = 2;
 
@@ -32,9 +32,9 @@ public class PrimePrinter {
                 if( nextOddNumber == nextPrimeSquare) {
                     ORD++;
                     nextPrimeSquare = primesList[ORD] * primesList[ORD];
-                    MULT[ORD-1]=nextOddNumber;
+                    primeMultiples[ORD-1]=nextOddNumber;
                 }
-                isPrime = isPrimeNumber(primesList, nextOddNumber, ORD, MULT);
+                isPrime = isPrimeNumber(primesList, nextOddNumber, ORD, primeMultiples);
 
             } while (!isPrime);
             nthPrime++;
@@ -72,15 +72,15 @@ public class PrimePrinter {
         System.out.println(PAGE_HEADING_TEMPLATE + pageNumber + "\n");
     }
 
-    private boolean isPrimeNumber(int[] primesList, int nextOddNumber, int ORD, int[] MULT) {
+    private boolean isPrimeNumber(int[] primesList, int nextOddNumber, int ORD, int[] primeMultiples) {
         boolean isPrime = true;
         int N = 2;
         while (N< ORD && isPrime) {
-            while (MULT[N]< nextOddNumber) {
+            while (primeMultiples[N]< nextOddNumber) {
                 //Odd+Odd = even and Odd+Odd+Odd = Odd. Gives next odd number which is not prime
-                MULT[N] += primesList[N] + primesList[N];
+                primeMultiples[N] += primesList[N] + primesList[N];
             }
-            if (MULT[N] == nextOddNumber) {
+            if (primeMultiples[N] == nextOddNumber) {
                 isPrime = false;
             }
             N++;
